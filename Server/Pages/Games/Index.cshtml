@@ -1,0 +1,74 @@
+﻿@page
+@model Server.Pages.Games.IndexModel
+
+@{
+    ViewData["Title"] = "Games";
+}
+
+<body class="bg">
+    <div id="mainshape">
+        <h1>Search Games by Player</h1>
+        <br />
+        <form action="~/Games/GamesByPlayerQuery" method="post">
+            <label for="players">Choose a player:</label>
+            <select type="text" name="PlayerName" id="PlayerName">
+
+
+                @foreach (var item in Model.TblPlayers)
+                {
+                    <option value="@item.Name.Trim()">@Html.DisplayFor(modelItem => item.Name)</option>
+                }
+
+                }
+            </select>
+            <input type="submit" name="submit" value="Search">
+        </form>
+        <br />
+        <h2>Whole Games List</h2>
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TblGames[0].PlayerId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TblGames[0].PlayerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TblGames[0].Score)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TblGames[0].Date)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TblGames.OrderByDescending(c => c.Date))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlayerId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlayerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Score)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+</body>
+

@@ -1,0 +1,46 @@
+﻿@page
+@model Server.Pages.Players.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<body class="bg">
+    <div id="mainshape">
+        <h1>Join to Damka community</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TblPlayers.Name" class="control-label"></label>
+                        <input asp-for="TblPlayers.Name" class="form-control" />
+                        <span asp-validation-for="TblPlayers.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TblPlayers.Email" class="control-label"></label>
+                        <input asp-for="TblPlayers.Email" class="form-control" />
+                        <span asp-validation-for="TblPlayers.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TblPlayers.Password" class="control-label"></label>
+                        <input asp-for="TblPlayers.Password" class="form-control" />
+                        <span asp-validation-for="TblPlayers.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-page="Index" style="color: black">Back to List</a>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
